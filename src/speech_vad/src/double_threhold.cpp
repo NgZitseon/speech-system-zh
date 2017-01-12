@@ -52,8 +52,8 @@ public:
 		ros::param::param<int>("~history_size",len,10);
 
 
-		ros::param::param<float>("~energyUpthreshold",_ITU,17.0);
-		ros::param::param<float>("~zeroUpthreshold",_IF,120.0);
+		ros::param::param<float>("~energyUpthreshold",_ITU,13.5);
+		ros::param::param<float>("~zeroUpthreshold",_IF,235.0);
 
 		_zclist.resize(len);
 		_eglist.resize(len);
