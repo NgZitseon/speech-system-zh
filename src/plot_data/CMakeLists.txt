@@ -137,6 +137,14 @@ target_link_libraries(
    ${catkin_LIBRARIES}
 )
 
+add_executable(denoised_data_plot 
+	src/denoised_data_plot.cpp
+)
+
+target_link_libraries(
+	denoised_data_plot
+   ${catkin_LIBRARIES}
+)
 
 
 add_executable(audio_pre_emphasis_plot
