@@ -49,9 +49,9 @@ def denoise(data):
             z += 1
             continue
 
-        print i
+
         Lambda = threshold(len(i), i)
-        print Lambda
+
         for ii in i:
             i[k] = threshold_func(ii, Lambda)
             k += 1
@@ -60,8 +60,8 @@ def denoise(data):
     return data
 
 def ros_pub(data):
-    pub = rospy.Publisher('denoised_audio_data', AudioData, queue_size=50)
-    pub.publish(data)
+    pub = rospy.Publisher('denoised_data', AudioData, queue_size=50)
+    pub.publish(data.astype(np.short), len(data))
 
 def callback(data):
     dec_data = wavelet_dec(data.data)
