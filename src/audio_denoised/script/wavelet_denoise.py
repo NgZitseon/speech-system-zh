@@ -17,15 +17,17 @@ def read_audiodata(data):
     audio_data_array = np.array(data)
     return audio_data_array
 
-
+#小波分解，小波sym8，层数3
 def wavelet_dec(data):
     wd_list = pywt.wavedec(data, 'sym8', level=3)
     return wd_list
 
+#小波重构，小波sym8
 def wavelet_rec(data):
     wr_list = pywt.waverec(data, 'sym8')
     return wr_list
 
+#小波降噪阈值
 def threshold(data_len, data):
     Lambda = np.std(data) * (np.sqrt(2 * np.log10(data_len)))
     return Lambda
@@ -36,6 +38,7 @@ def threshold_func(value, Lambda):
     elif abs(value) >= Lambda:
             threshold_value = np.sign(value) * (abs(value) - Lambda)
     return threshold_value
+
 
 def denoise(data):
     z = 0
