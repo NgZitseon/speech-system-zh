@@ -33,6 +33,13 @@ def threshold(data_len, data):
     Lambda = np.std(data) * (np.sqrt(2 * np.log10(data_len)))
     return Lambda
 
+
+########################################
+#  软阈值函数                           #
+#      | sign(w)(|w| - λ) , |w| >= λ   #
+#  W = |                               #
+#      | 0 , |w| < λ                   #
+########################################
 def threshold_func(value, Lambda):
     if abs(value) < Lambda:
             threshold_value = 0
