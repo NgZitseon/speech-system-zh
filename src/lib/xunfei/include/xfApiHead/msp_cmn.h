@@ -28,7 +28,7 @@
 #ifndef __MSP_CMN_H__
 #define __MSP_CMN_H__
 
-#include "../xfApiHead/msp_types.h"
+#include "msp_types.h"
 
 #ifdef __cplusplus
 extern "C" {

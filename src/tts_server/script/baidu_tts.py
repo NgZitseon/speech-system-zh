@@ -11,6 +11,7 @@ import sys
 import rospy
 from pypinyin import pinyin, lazy_pinyin
 from std_msgs.msg import String
+from std_msgs.msg import Int16
 from pypinyin import lazy_pinyin
 import os
 #设置默认编码格式-勿动
@@ -30,6 +31,7 @@ class BaiduTTS:
         rospy.init_node('baidu_tts', anonymous=True)
         rospy.Subscriber(subtopic,String,self.process)
         self.pub = rospy.Publisher("tts_server/baidu_tts",String,queue_size=10)
+        self.processid()
         rospy.spin()
 
     def __creatWorkspace(self,dir):
@@ -54,6 +56,16 @@ class BaiduTTS:
             file =  self.nameForAudioFile("/tmp/baidu_tts",data.data)
             self.tts_man.runTTS(data.data,file)
             self.pub.publish(file)
-            
+
+    def processid(self):
+
+        self.pubpid = rospy.Publisher("tts_server/baidu_tts_pid", Int16, queue_size=50)
+        rate = rospy.Rate(1)
+        while not rospy.is_shutdown():
+            pid = os.getpid()
+            rospy.loginfo("the pid of baidu_tts is %s" % pid)
+            self.pubpid.publish(pid)
+            rate.sleep()
+
 if __name__ == '__main__':
     BaiduTTS()

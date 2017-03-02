@@ -32,7 +32,7 @@
 extern "C" {
 #endif /* C++ */
 
-#include "../xfApiHead/msp_types.h"
+#include "msp_types.h"
 
 /** 
  * @fn		QISRSessionBegin
