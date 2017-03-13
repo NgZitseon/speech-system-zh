@@ -37,7 +37,7 @@ public:
 
 		//初始化变量
 		ros::param::param<int>("~delay_ms",_cache_time,200);
-		ros::param::param<std::string>("~signal_subscriber",_sub_name1,"audio_data");
+    ros::param::param<std::string>("~signal_subscriber",_sub_name1,"asr_awaken/audio_data");
 		ros::param::param<std::string>("~vad_subscriber",_sub_name2,"double_threshold_result");
 
 		//开辟缓存空间

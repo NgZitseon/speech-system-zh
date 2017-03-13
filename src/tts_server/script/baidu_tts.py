@@ -31,7 +31,7 @@ class BaiduTTS:
         rospy.init_node('baidu_tts', anonymous=True)
         rospy.Subscriber(subtopic,String,self.process)
         self.pub = rospy.Publisher("tts_server/baidu_tts",String,queue_size=10)
-        self.processid()
+#        self.processid()
         rospy.spin()
 
     def __creatWorkspace(self,dir):
@@ -57,15 +57,15 @@ class BaiduTTS:
             self.tts_man.runTTS(data.data,file)
             self.pub.publish(file)
 
-    def processid(self):
+#    def processid(self):
 
-        self.pubpid = rospy.Publisher("tts_server/baidu_tts_pid", Int16, queue_size=50)
-        rate = rospy.Rate(1)
-        while not rospy.is_shutdown():
-            pid = os.getpid()
-            rospy.loginfo("the pid of baidu_tts is %s" % pid)
-            self.pubpid.publish(pid)
-            rate.sleep()
+#        self.pubpid = rospy.Publisher("tts_server/baidu_tts_pid", Int16, queue_size=50)
+#        rate = rospy.Rate(1)
+#        while not rospy.is_shutdown():
+#            pid = os.getpid()
+#           # rospy.loginfo("the pid of baidu_tts is %s" % pid)
+#            self.pubpid.publish(pid)
+#            rate.sleep()
 
 if __name__ == '__main__':
     BaiduTTS()

@@ -28,7 +28,7 @@ public:
 		_sb = _nh.subscribe(_subtopic,10,tts_callback);
 		_pub = _nh.advertise<std_msgs::String>("audio_play/play_state",1000);
 
-    _pubpid = _nh.advertise<std_msgs::Int16>("play_server/play_pid", 50);
+//    _pubpid = _nh.advertise<std_msgs::Int16>("play_server/play_pid", 50);
     ros::spinOnce();
 
 	}
@@ -83,18 +83,18 @@ public:
 	    _end = false;
   }
 
-  static void processid()
-  {
-    while(ros::ok())
-    {
-      std_msgs::Int16 ipid;
-      ipid.data = getpid();
-      _pubpid.publish(ipid);
-//      ROS_INFO("process id is %d" ,ipid.data);
-      sleep(1);
-    }
+//  static void processid()
+//  {
+//    while(ros::ok())
+//    {
+//      std_msgs::Int16 ipid;
+//      ipid.data = getpid();
+//      _pubpid.publish(ipid);
+////      ROS_INFO("process id is %d" ,ipid.data);
+//      sleep(1);
+//    }
 
-  }
+//  }
 
 private:
     ros::NodeHandle _nh;
@@ -105,14 +105,14 @@ private:
     static libvlc_instance_t* _engine;
     static libvlc_media_player_t* _mp;
     static ros::Publisher _pub;
-    static ros::Publisher _pubpid;
+//    static ros::Publisher _pubpid;
 
 };
 bool AuidoPlayer::_end = false;
 libvlc_instance_t* AuidoPlayer::_engine;
 libvlc_media_player_t* AuidoPlayer::_mp;
 ros::Publisher AuidoPlayer::_pub;
-ros::Publisher AuidoPlayer::_pubpid;
+//ros::Publisher AuidoPlayer::_pubpid;
 }
 
 int main (int argc, char **argv)
@@ -120,7 +120,7 @@ int main (int argc, char **argv)
   ROS_INFO ("Ros Node Name : audio_play");
   ros::init(argc, argv, "audio_play");
   Hntea::AuidoPlayer player;
-  player.processid();
+//  player.processid();
 }
 
 

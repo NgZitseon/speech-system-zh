@@ -23,7 +23,7 @@ class TulingNLU:
         rospy.init_node('nlu_tuling', anonymous=True)
         rospy.Subscriber(subtopic,String,self.process)
         self.pub = rospy.Publisher("nlu_server/tuling_res",String,queue_size=10)
-        self.processid()
+#        self.processid()
         rospy.spin()
     
 
@@ -34,15 +34,15 @@ class TulingNLU:
             rospy.loginfo('[TulinNLU: ]'+result)
             self.pub.publish(result)
 
-    def processid(self):
+#    def processid(self):
 
-        self.pubpid = rospy.Publisher("nlu_server/tuling_pid", Int16, queue_size=50)
-        rate = rospy.Rate(1)
-        while not rospy.is_shutdown():
-            pid = os.getpid()
-            rospy.loginfo("the pid of baidu_tts is %s" % pid)
-            self.pubpid.publish(pid)
-            rate.sleep()
+#        self.pubpid = rospy.Publisher("nlu_server/tuling_pid", Int16, queue_size=50)
+#        rate = rospy.Rate(1)
+#        while not rospy.is_shutdown():
+#            pid = os.getpid()
+#            # rospy.loginfo("the pid of nlu is %s" % pid)
+#            self.pubpid.publish(pid)
+#            rate.sleep()
 
 if __name__ == "__main__":
     TulingNLU()

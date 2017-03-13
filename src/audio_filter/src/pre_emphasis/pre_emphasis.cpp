@@ -12,7 +12,7 @@ class RosAudioPreEmphasis{
 public:
 	RosAudioPreEmphasis(){
         ros::param::param<float>("~u", _u, 0.9378);
-		_sb = _nh.subscribe("audio_data",50,chapterCallback);
+    _sb = _nh.subscribe("asr_awaken/audio_data",50,chapterCallback);
 		_pub = _nh.advertise<audio_msgs::AudioData>("audio_pre_emphasis",50);
 		ros::spin();
 	}
