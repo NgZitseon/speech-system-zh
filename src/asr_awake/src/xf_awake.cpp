@@ -17,17 +17,19 @@ public:
     sub = n.subscribe("asr_server/xf/local_s_res", 50 ,awakecallback);
     sub_tts = n.subscribe("tts_server/baidu_tts_pid", 50, ttsPIDcallback);
     sub_nlu = n.subscribe("nlu_server/tuling_pid",50,nluPIDcallback);
-    sub_play = n.subscribe("play_server/play_pid",50,playPIDcallback);
+    //sub_play = n.subscribe("play_server/play_pid",50,playPIDcallback);
     ros::spin();
   }
 
   static void awakecallback(const std_msgs::String& msg)
   {
     if((tts_count==0)&&(nlu_count==0)&&(play_count==0)&&(msg.data!="Null"))
+    {
       system("rosrun tts_server baidu_tts.py &");
       system("rosrun nlu_server tuling_nlu.py &");
-      system("rosrun audio_play audio_play &");
-  }
+      //system("rosrun audio_play audio_play &");
+    }
+   }
 
   static void ttsPIDcallback(const std_msgs::Int16& tts_pid)
   {
@@ -37,7 +39,7 @@ public:
     tts_count += 1;
     cout<<tts_count<<endl;
 
-    if(tts_count == 10)
+    if(tts_count == 20)
     {
       system(tts_kill_cmd);
       tts_count = 0;
@@ -50,25 +52,25 @@ public:
     sprintf(nlu_kill_cmd, "kill %d", nlu_pid);
     nlu_count += 1;
 
-    if(nlu_count == 10)
+    if(nlu_count == 20)
     {
       system(nlu_kill_cmd);
       nlu_count = 0;
     }
   }
 
-  static void playPIDcallback(const std_msgs::Int16& play_pid)
-  {
-   char play_kill_cmd[30];
-   sprintf(play_kill_cmd,"kill %d", play_pid);
-   play_count += 1;
+//  static void playPIDcallback(const std_msgs::Int16& play_pid)
+//  {
+//   char play_kill_cmd[30];
+//   sprintf(play_kill_cmd,"kill %d", play_pid);
+//   play_count += 1;
 
-   if(play_count == 10)
-   {
-     system(play_kill_cmd);
-     play_count = 0;
-   }
-  }
+//   if(play_count == 10)
+//   {
+//     system(play_kill_cmd);
+//     play_count = 0;
+//   }
+//  }
 
 private:
 

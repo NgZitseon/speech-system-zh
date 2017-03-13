@@ -134,10 +134,17 @@ target_link_libraries(xf_awake
    ${catkin_LIBRARIES}
 )
 
-add_executable(testnode src/testnode.cpp)
-target_link_libraries(testnode
+add_executable(xf_local_awaken src/xf_local_awaken.cpp)
+target_link_libraries(xf_local_awaken
    ${catkin_LIBRARIES}
 )
+
+target_link_libraries(xf_local_awaken
+  ${catkin_LIBRARIES}
+  libmsc.so -ldl -pthread
+)
+
+
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(asr_awake_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
