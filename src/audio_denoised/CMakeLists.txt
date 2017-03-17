@@ -130,6 +130,12 @@ include_directories(
 
 ## Declare a C++ executable
 # add_executable(audio_denoised_node src/audio_denoised_node.cpp)
+add_executable(speex_denoise src/speex_denoise.cpp)
+target_link_libraries(speex_denoise
+   ${catkin_LIBRARIES}
+   libspeexdsp.so -ldl -pthread
+)
+
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
