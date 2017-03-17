@@ -52,7 +52,7 @@ public:
       cout<<"QIVRegisterNotify failed! error code: "<<err_code<<endl;
     }
 
-    _sb = _nh.subscribe("audio_data",1000,awakecallback);
+    _sb = _nh.subscribe("denoised_data",1000,awakecallback);
     ros::spin();
   }
 
