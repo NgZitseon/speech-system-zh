@@ -1,6 +1,8 @@
 <launch>
 
 	<include file="$(find audio_capture)/launch/capture.launch" />
+        <include file="$(find asr_awake)/launch/awake.launch" />
+        <include file="$(find audio_denoised)/launch/denoise.launch" />
 	<include file="$(find audio_filter)/launch/filter.launch" />
 	<include file="$(find audio_fft_factory)/launch/fft.launch" />
 	<include file="$(find audio_fectures)/launch/features.launch" />

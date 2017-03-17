@@ -3,7 +3,7 @@
   	<!-- -->
   	<node name="cache_manager" pkg="asr_brige" type="cache_manager" output="screen">
     	<param name="delay_ms" value="200"/>
-    	<param name="signal_subscriber" value="audio_data"/>
+        <param name="signal_subscriber" value="asr_awaken/audio_data"/>
     	<param name="vad_subscriber" value="double_threshold_result"/>
   	</node>
 
