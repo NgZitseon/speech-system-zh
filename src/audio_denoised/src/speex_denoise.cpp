@@ -19,7 +19,7 @@ public:
     speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_NOISE_SUPPRESS, &_denoiseDB);
     speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_AGC, &_agc_state);
     //speex_preprocess_ctl(st, SPEEX_PREPROCESS_GET_DENOISE, &j);
-    speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_AGC_MAX_GAIN, &_agcLevel);
+    speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_AGC_LEVEL, &_agcLevel);
     _pub = _nh.advertise<audio_msgs::AudioData>("denoised_data",1000);
   }
 
