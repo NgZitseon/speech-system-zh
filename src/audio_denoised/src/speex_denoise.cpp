@@ -13,10 +13,13 @@ public:
   {
     _denoiseDB = DB;
     _denoise_state = 1;
-
+    _agc_state = 0;
+    _agcLevel = 24000;
     speex_preprocess_ctl(st, SPEEX_PREPROCESS_GET_DENOISE,&_denoise_state);
     speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_NOISE_SUPPRESS, &_denoiseDB);
-
+    speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_AGC, &_agc_state);
+    //speex_preprocess_ctl(st, SPEEX_PREPROCESS_GET_DENOISE, &j);
+    speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_AGC_MAX_GAIN, &_agcLevel);
     _pub = _nh.advertise<audio_msgs::AudioData>("denoised_data",1000);
   }
 
@@ -40,6 +43,8 @@ public:
 private:
   int _denoise_state;
   int _denoiseDB;
+  int _agcLevel;
+  int _agc_state;
   ros::NodeHandle _nh;
   ros::Subscriber _sb;
   static ros::Publisher _pub;
