@@ -12,7 +12,7 @@
   	<!-- 
 		<node name="audio_AMDF" pkg="audio_fectures" type="audio_AMDF" output="screen" />
   	-->
-  	
+        <!--
 	<node name="power_spectrum" pkg="audio_fectures" type="power_spectrum" output="screen"/>
-  	
+        -->
 </launch>

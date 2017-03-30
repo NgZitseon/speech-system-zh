@@ -89,7 +89,7 @@ public:
 		static bool lock = true;
 		if(std::strcmp(msgs.data.c_str(),"start") == 0){
 			if(isTooFast(500))
-				ROS_INFO("==VAD Translate too false! Noise==");
+        ROS_INFO("==VAD Translate too fast! Noise==");
 			else{
 				_start = true;
 				lock = false;

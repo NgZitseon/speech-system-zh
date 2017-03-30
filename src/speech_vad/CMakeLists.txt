@@ -134,6 +134,12 @@ target_link_libraries(double_threhold_VAD
    ${catkin_LIBRARIES}
  )
 
+add_executable(Speex_Vad src/Speex_Vad.cpp)
+target_link_libraries(Speex_Vad
+   ${catkin_LIBRARIES}
+   libspeexdsp.so -ldl -pthread
+)
+
 #############
 ## Install ##
 #############

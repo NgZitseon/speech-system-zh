@@ -24,13 +24,13 @@
     	
   	</node>
 	-->
-
+        <!--
   	<node name="xf_onlineasr_block" pkg="asr_server" type="xf_onlineasr_block" output="screen">
-                <!--
-    		<param name="configfile" value="$(arg name)/>
-                -->
-  	</node>
 
+    		<param name="configfile" value="$(arg name)/>
+
+  	</node>
+        -->
 	<!-- 
 	<node name="xf_onlineasr_file" pkg="asr_server" type="xf_onlineasr_file" output="screen">
     		<param name="configfile" value="$(arg name)/>
