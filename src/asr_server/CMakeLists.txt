@@ -176,6 +176,13 @@ target_link_libraries(xf_onlineasr_block
   libmsc.so -ldl -pthread
 )
 
+add_executable(XML_analyzed
+        src/XML_analyzed.cpp
+        ../lib/tinyxml2/tinyxml2.cpp
+)
+target_link_libraries(XML_analyzed
+  ${catkin_LIBRARIES}
+)
 #############
 ## Install ##
 #############

@@ -1,15 +1,18 @@
 #BNF+IAT 1.0 UTF-8;
 
+/*(学习|模仿)动作；
+  (学习|模仿)手势；
+  (学习|模仿)姿势；
+*/
+
 !grammar call;
-!slot <name>;
+!slot <activity>;
+!slot <other>;
 !start <commands>;
-<commands>:(找一下|打电话给) <name>;
-<name>: 张三|李四;
+<commands>:(学习!id(101)|模仿!id(101))<activity>;
+<activity>: 动作!id(10001)|手势!id(10001)|姿势!id(10001);
 
-/*!grammar wakeup;
-!slot <key_words>;
 
-start <comments>;
 
-<comments>:小茜小茜;*/
+
 

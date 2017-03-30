@@ -25,7 +25,7 @@ public:
     }
     _pub1 = _nh.advertise<audio_msgs::AudioData>("asr_awaken/audio_data",1000);
     _pub2 = _nh.advertise<std_msgs::String>("camera_on",10);
-    _pub3 = _nh.advertise<std_msgs::String>("learning_on",10);
+    //_pub3 = _nh.advertise<std_msgs::String>("learning_on",10);
   }
 
 
@@ -37,7 +37,7 @@ public:
     while(_status==1)
     {
       _pub2.publish(wakeup);
-      _pub3.publish(wakeup);
+     // _pub3.publish(wakeup);
       loop_rate.sleep();
       ros::spinOnce();
     }
@@ -128,7 +128,7 @@ private:
   ros::Subscriber _sb;
   static ros::Publisher _pub1;
   static ros::Publisher _pub2;
-  static ros::Publisher _pub3;
+  //static ros::Publisher _pub3;
   static int audio_count;
   static int err_code;
   static const char* session_id;
@@ -144,7 +144,7 @@ const char* awaken::session_id = NULL;
 const char* awaken::ssb_param = "ivw_threshold=0:-20,sst=wakeup";
 ros::Publisher awaken::_pub1;
 ros::Publisher awaken::_pub2;
-ros::Publisher awaken::_pub3;
+//ros::Publisher awaken::_pub3;
 
 
 int main(int argc, char *argv[])
