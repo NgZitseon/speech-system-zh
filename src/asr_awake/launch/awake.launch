@@ -1,0 +1,5 @@
+<launch>
+<node name="asr_awake_node" pkg="asr_awake" type="xf_local_awaken" output="screen">
+
+</node>
+</launch>

@@ -1,0 +1,5 @@
+<launch>
+<node name="audio_denoised_node" pkg="audio_denoised" type="speex_denoise" output="screen">
+
+</node>
+</launch>
