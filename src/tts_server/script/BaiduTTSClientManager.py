@@ -126,7 +126,7 @@ class BaiduTtsClientManager:
                    "&vol="+self.__vol+\
                    "&pit="+self.__pit+\
                    "&spd="+self.__spd+\
-                   "&tok=" +unicode(self.__access_token,"utf-8")
+                   "&tok="+unicode(self.__access_token,"utf-8")
                           
         f = urllib2.urlopen(url)
         with open(file,"wb") as fd:

@@ -3,9 +3,11 @@
 	<include file="$(find audio_capture)/launch/capture.launch" />
         <include file="$(find asr_awake)/launch/awake.launch" />
         <include file="$(find audio_denoised)/launch/denoise.launch" />
-	<include file="$(find audio_filter)/launch/filter.launch" />
+        <include file="$(find audio_filter)/launch/filter.launch" />
+        <!--
 	<include file="$(find audio_fft_factory)/launch/fft.launch" />
-	<include file="$(find audio_fectures)/launch/features.launch" />
+        -->
+        <include file="$(find audio_fectures)/launch/features.launch" />
   	<include file="$(find speech_vad)/launch/double_threshold.launch" />
   	<include file="$(find asr_brige)/launch/brige.launch" />
   	<include file="$(find training_tools)/launch/training.launch" />
@@ -13,6 +15,7 @@
 
         <include file="$(find tts_server)/launch/tts.launch" />
   	<include file="$(find audio_play)/launch/play.launch" />
+        <!--
         <include file="$(find nlu_server)/launch/nlu.launch" />
-
+        -->
 </launch>
