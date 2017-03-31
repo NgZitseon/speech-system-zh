@@ -15,9 +15,11 @@ char* XMLanalyzed(const char* XMLdata)
   XMLElement *root=awk.RootElement();
   XMLElement *result=root->FirstChildElement("result");
   XMLElement *object=result->FirstChildElement("object");
+  XMLElement *rawtext=root->FirstChildElement("rawtext");
   XMLElement *child1=object->FirstChildElement();
 
-
+  const char * value = rawtext->GetText();
+  std::cout<<"Command : "<<value<<std::endl;
   const XMLAttribute *attribute1=child1->FirstAttribute();
   //std::cout<<attribute1->Value()<<std::endl;
 
