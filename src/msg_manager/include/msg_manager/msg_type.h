@@ -1,0 +1,9 @@
+#ifndef MSG_TYPE_H
+#define MSG_TYPE_H
+
+#define SYSTEM_STATUS_WAKEUP_YES 1
+#define SYSTEM_STATUS_WAKEUP_NO 0
+#define SYSTEM_STATUS_IS_FREE 2
+#define SYSTEM_STATUS_NOT_FREE 3
+
+#endif // MSG_TYPE_H

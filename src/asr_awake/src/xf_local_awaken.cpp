@@ -1,9 +1,10 @@
 #include "../../lib/xunfei/include/xfApiHead/msp_cmn.h"
 #include "../../lib/xunfei/include/xfApiHead/msp_errors.h"
 #include "../../lib/xunfei/include/xfApiHead/qivw.h"
+#include "../../msg_manager/include/msg_manager/msg_type.h"
 #include "audio_msgs/AudioData.h"
 #include <std_msgs/String.h>
-#include <std_msgs/Bool.h>
+#include <std_msgs/Int8.h>
 #include <stdio.h>
 #include <iostream>
 #include <vector>
@@ -35,7 +36,7 @@ public:
     std_msgs::String wakeup;
     wakeup.data = "wake_up";
     ros::Rate loop_rate(1);
-    while(_status==1)
+    while(_status==SYSTEM_STATUS_WAKEUP_YES)
     {
       _pub2.publish(wakeup);
      // _pub3.publish(wakeup);
@@ -58,15 +59,15 @@ public:
     ros::spin();
   }
 
- static void msgManagerCallback(const std_msgs::Bool &msg)
+ static void msgManagerCallback(const std_msgs::Int8 &msg)
  {
-   if(msg.data)
+   if(msg.data == SYSTEM_STATUS_IS_FREE)
    {
-     _sysfree = true;
+     _sysfree = SYSTEM_STATUS_IS_FREE;
    }
-   else
+   else if(msg.data == SYSTEM_STATUS_NOT_FREE)
    {
-     _sysfree = false;
+     _sysfree = SYSTEM_STATUS_NOT_FREE;
    }
  }
 
@@ -75,12 +76,12 @@ public:
 
 //    _pub1.publish(data);
 //    audio_count++;
-    if(_status == 0)
+    if(_status == SYSTEM_STATUS_WAKEUP_NO)
     {
       vector<int16_t> audio_vec(data.data);
       run_ivw(NULL,audio_vec);
     }
-    else if((_status == 1)&&_sysfree)
+    else if((_status == SYSTEM_STATUS_WAKEUP_YES)&&(_sysfree==SYSTEM_STATUS_IS_FREE))
     {
       _pub1.publish(data);
     }
@@ -100,7 +101,7 @@ public:
     else if(MSP_IVW_MSG_WAKEUP == msg)
     {
       cout<<"MSP_IVW_MSG_WAKEUP result = "<<rinfo<<endl;
-      _status = 1;
+      _status = SYSTEM_STATUS_WAKEUP_YES;
       remote_awake();
 //      QIVWSessionEnd(sessionID,"QIV_SUCCESS");
     }
@@ -137,7 +138,7 @@ public:
 
 private:
   static int _status;
-  static bool _sysfree;
+  static int _sysfree;
   ros::NodeHandle _nh;
   ros::Subscriber _sb;
   ros::Subscriber _msg_sb;
@@ -150,7 +151,7 @@ private:
   static const char *ssb_param;
   static int countNum;
 };
-bool awaken::_sysfree = true;
+int awaken::_sysfree = SYSTEM_STATUS_IS_FREE;
 int awaken::_status = 0;
 int awaken::countNum = 0;
 int awaken::err_code = 0;

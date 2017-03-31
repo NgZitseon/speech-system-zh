@@ -1,5 +1,7 @@
 #include <ros/ros.h>
 #include <std_msgs/Bool.h>
+#include "./../include/msg_manager/msg_type.h"
+
 class msg_manager
 {
 public:
@@ -15,6 +17,7 @@ public:
       _if_command = true;
     }
   }
+
 
   static void if_activity(const std_msgs::Bool &msg2)
   {
