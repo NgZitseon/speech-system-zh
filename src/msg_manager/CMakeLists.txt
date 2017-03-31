@@ -122,6 +122,10 @@ include_directories(
 # add_library(msg_manager
 #   src/${PROJECT_NAME}/msg_manager.cpp
 # )
+add_executable(msg_manager src/msg_manager.cpp)
+target_link_libraries(msg_manager
+   ${catkin_LIBRARIES}
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries

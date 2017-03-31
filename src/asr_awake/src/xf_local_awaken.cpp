@@ -3,6 +3,7 @@
 #include "../../lib/xunfei/include/xfApiHead/qivw.h"
 #include "audio_msgs/AudioData.h"
 #include <std_msgs/String.h>
+#include <std_msgs/Bool.h>
 #include <stdio.h>
 #include <iostream>
 #include <vector>
@@ -53,21 +54,33 @@ public:
     }
 
     _sb = _nh.subscribe("denoised_data",1000,awakecallback);
+    _msg_sb = _nh.subscribe("/msg_manager/activity",50,msgManagerCallback);
     ros::spin();
   }
 
+ static void msgManagerCallback(const std_msgs::Bool &msg)
+ {
+   if(msg.data)
+   {
+     _sysfree = true;
+   }
+   else
+   {
+     _sysfree = false;
+   }
+ }
 
  static void awakecallback(const audio_msgs::AudioData &data)
   { 
 
-
+//    _pub1.publish(data);
 //    audio_count++;
     if(_status == 0)
     {
       vector<int16_t> audio_vec(data.data);
       run_ivw(NULL,audio_vec);
     }
-    else if(_status == 1)
+    else if((_status == 1)&&_sysfree)
     {
       _pub1.publish(data);
     }
@@ -124,18 +137,20 @@ public:
 
 private:
   static int _status;
+  static bool _sysfree;
   ros::NodeHandle _nh;
   ros::Subscriber _sb;
+  ros::Subscriber _msg_sb;
   static ros::Publisher _pub1;
   static ros::Publisher _pub2;
   //static ros::Publisher _pub3;
-  static int audio_count;
+  static int audio_count; 
   static int err_code;
   static const char* session_id;
   static const char *ssb_param;
   static int countNum;
 };
-
+bool awaken::_sysfree = true;
 int awaken::_status = 0;
 int awaken::countNum = 0;
 int awaken::err_code = 0;
