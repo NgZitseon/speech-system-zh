@@ -17,6 +17,8 @@
 	-->	
 	</node>
 	
+        <node name="XML_analyzed" pkg="asr_server" type="XML_analyzed" output="screen">
+        </node>
 	<!--
 	<node name="xf_localasr_file" pkg="asr_server" type="xf_localasr_file" output="screen">
   		
