@@ -1,0 +1,5 @@
+<launch>
+<node name="msg_manager" pkg="msg_manager" type="msg_manager" output="screen">
+
+</node>
+</launch>

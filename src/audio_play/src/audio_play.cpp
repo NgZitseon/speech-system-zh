@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <ros/ros.h>
 #include <std_msgs/String.h>
-#include <std_msgs/Int16.h>
+#include <std_msgs/Int8.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -17,6 +17,7 @@
 #include <vlc/libvlc_events.h>
 #include <vlc/libvlc_media_discoverer.h>
 #include <vlc/libvlc_media_player.h>
+#include "../../msg_manager/include/msg_manager/msg_type.h"
 
 namespace Hntea{
 
@@ -26,10 +27,10 @@ public:
 
 		ros::param::param<std::string>("~subtopic",_subtopic,"/tts_server/baidu_tts");
 		_sb = _nh.subscribe(_subtopic,10,tts_callback);
-		_pub = _nh.advertise<std_msgs::String>("audio_play/play_state",1000);
+    _pub = _nh.advertise<std_msgs::Int8>("system_status",10);
 
 //    _pubpid = _nh.advertise<std_msgs::Int16>("play_server/play_pid", 50);
-    ros::spinOnce();
+    ros::spin();
 
 	}
 	~AuidoPlayer(){}
@@ -40,6 +41,9 @@ public:
 
 	static void libvlc_callback( const struct libvlc_event_t * event, void *userdata ){
 		_end = true;
+    std_msgs::Int8 status;
+    status.data = SYSTEM_STATUS_IS_FREE;
+    _pub.publish(status);
 	}
 
 

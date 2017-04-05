@@ -26,24 +26,24 @@ public:
       cout<<"QIVSessionBegin failed, error code is: "<<err_code<<endl;
     }
     _pub1 = _nh.advertise<audio_msgs::AudioData>("asr_awaken/audio_data",1000);
-    _pub2 = _nh.advertise<std_msgs::String>("camera_on",10);
+    _pub2 = _nh.advertise<std_msgs::Int8>("local_asr_result_msg",10);
     //_pub3 = _nh.advertise<std_msgs::String>("learning_on",10);
   }
 
 
-  static void remote_awake()
-  {
-    std_msgs::String wakeup;
-    wakeup.data = "wake_up";
-    ros::Rate loop_rate(1);
-    while(_status==SYSTEM_STATUS_WAKEUP_YES)
-    {
-      _pub2.publish(wakeup);
-     // _pub3.publish(wakeup);
-      loop_rate.sleep();
-      ros::spinOnce();
-    }
-  }
+//  static void remote_awake()
+//  {
+//    std_msgs::String wakeup;
+//    wakeup.data = "wake_up";
+//    ros::Rate loop_rate(1);
+//    while(_status==SYSTEM_STATUS_WAKEUP_YES)
+//    {
+//      _pub2.publish(wakeup);
+//     // _pub3.publish(wakeup);
+//      loop_rate.sleep();
+//      ros::spinOnce();
+//    }
+//  }
 
   void run()
   {
@@ -69,13 +69,16 @@ public:
    {
      _sysfree = SYSTEM_STATUS_NOT_FREE;
    }
+   else if(msg.data == SYSTEM_STATUS_WAKEUP_NO)
+   {
+     _status = SYSTEM_STATUS_WAKEUP_NO;
+   }
  }
 
  static void awakecallback(const audio_msgs::AudioData &data)
   { 
 
-//    _pub1.publish(data);
-//    audio_count++;
+
     if(_status == SYSTEM_STATUS_WAKEUP_NO)
     {
       vector<int16_t> audio_vec(data.data);
@@ -102,8 +105,11 @@ public:
     {
       cout<<"MSP_IVW_MSG_WAKEUP result = "<<rinfo<<endl;
       _status = SYSTEM_STATUS_WAKEUP_YES;
-      remote_awake();
-//      QIVWSessionEnd(sessionID,"QIV_SUCCESS");
+      std_msgs::Int8 camera_status;
+      camera_status.data = SYSTEM_STATUS_CAMERA_ON;
+      //remote_awake();
+      _pub2.publish(camera_status);
+
     }
     return 0;
   }

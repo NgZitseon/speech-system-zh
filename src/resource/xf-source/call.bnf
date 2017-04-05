@@ -8,9 +8,16 @@
 !grammar call;
 !slot <activity>;
 !slot <other>;
-!start <commands>;
-<commands>:(学习!id(101)|模仿!id(101))<activity>;
+!slot <sleep>;
+
+!start <Commands>;
+<Commands>:<command1> | <command2>
+
+<command1>:[开始](学习!id(101)|模仿!id(101))<activity>;
 <activity>: 动作!id(10001)|手势!id(10001)|姿势!id(10001);
+
+<command2>:<sleep>;
+<sleep>: 休眠!id(10000)|睡觉!id(10000)|关机!id(10000)|你可以滚了!id(10000)|退下!id(10000);
 
 
 
